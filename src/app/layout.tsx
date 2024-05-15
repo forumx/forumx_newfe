@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import {StoreProvider} from "@/redux/storeProvider";
+import {Suspense} from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
 	  // <StoreProvider>
 		  <html lang="en">
-		  <body className={inter.className}>{children}</body>
+			<Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
 		  </html>
 	  // </StoreProvider>
    
