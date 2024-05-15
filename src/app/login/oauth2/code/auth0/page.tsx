@@ -1,12 +1,10 @@
+import RedirectToPrevPage from "@/components/redirectToPrevPage";
 
-
-const Auth0Page = async(props) => {
-	
-	await console.log("check prop: ", props);
+const Auth0Page = async() => {
 	
 	return (
 		<>
-			auth0 page
+			<RedirectToPrevPage />
 		</>
 	)
 }
