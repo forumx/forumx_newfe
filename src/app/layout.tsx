@@ -17,11 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-	  // <StoreProvider>
+	  <StoreProvider>
 		  <html lang="en">
-			<Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+			<body><Suspense fallback={<div>Loading...</div>}>
+				{children}</Suspense></body>
+			
 		  </html>
-	  // </StoreProvider>
+	  </StoreProvider>
    
   );
 }
