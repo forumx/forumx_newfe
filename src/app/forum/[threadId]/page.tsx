@@ -6,6 +6,7 @@ import {UserOutlined} from "@ant-design/icons";
 import {Avatar} from "antd";
 import "./threadDetails.scss"
 import {FaReply} from "react-icons/fa";
+import CommentList from "@/app/forum/components/comment/commentList/commentList";
 
 const ThreadDetails = (props: any) => {
 	const threadId = props.params.threadId;
@@ -36,26 +37,30 @@ const ThreadDetails = (props: any) => {
 		fetchData();
 	}, [threadId]);
 	return (
-		<div className={"thread-detail"}>
-			<div className={"author"}>
-				<Avatar className={"avatar"} size={64} icon={<UserOutlined />} src={currentThread?.user.img_url} />
-				<div className={"author-name"}>{currentThread?.user.name}</div>
-			</div>
-			<div className={"thread"}>
-				<div className={"post-time"}>
-					<span>{currentThread?.createdAt}</span>
+		<div>
+			<div className={"thread-detail"}>
+				<div className={"author"}>
+					<Avatar className={"avatar"} size={64} icon={<UserOutlined />} src={currentThread?.user.img_url} />
+					<div className={"author-name"}>{currentThread?.user.name}</div>
 				</div>
-				<div className={"content-wrapper"}>
-					<div className={"content"}>
-						{currentThread?.content}
+				<div className={"thread"}>
+					<div className={"post-time"}>
+						<span>{currentThread?.createdAt}</span>
 					</div>
-					<div className={"reply"}>
-						<FaReply />
-						<div className={"title"}>Reply</div>
+					<div className={"content-wrapper"}>
+						<div className={"content"}>
+							{currentThread?.content}
+						</div>
+						<div className={"reply"}>
+							<FaReply />
+							<div className={"title"}>Reply</div>
+						</div>
 					</div>
 				</div>
 			</div>
+			<CommentList threadId={currentThread?.id}/>
 		</div>
+		
 	)
 }
 
