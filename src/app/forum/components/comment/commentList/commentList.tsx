@@ -5,7 +5,7 @@ import {CommentType} from "@/types/comment";
 import CommentItem from "@/app/forum/components/comment/commentItem/commentItem";
 
 interface CommentListProp {
-	threadId: number
+	threadId: number | undefined
 }
 
 const CommentList:React.FC<CommentListProp> = ({threadId}) => {
