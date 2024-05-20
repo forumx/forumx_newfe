@@ -58,6 +58,8 @@ const ThreadDetails = (props: any) => {
 					</div>
 				</div>
 			</div>
+			<div className={""}>#Comments {currentThread?.commentCount}</div>
+			
 			<CommentList threadId={currentThread?.id}/>
 		</div>
 		

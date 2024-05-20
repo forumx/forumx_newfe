@@ -9,15 +9,13 @@ interface CommentListProp {
 }
 
 const CommentList:React.FC<CommentListProp> = ({threadId}) => {
-	// console.log(threadId);
 	const [commentList, setCommentList] = useState<CommentType[]> ([]);
-	const id = threadId;
 	
 	useEffect(() => {
-		// const id = threadId;
+		
 		const fetchData = async () => {
 			try {
-				const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_FORUM}/comments/${id}`, {
+				const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_FORUM}/comments/${threadId}`, {
 					method: 'GET',
 					credentials: 'include'
 				});
@@ -33,9 +31,9 @@ const CommentList:React.FC<CommentListProp> = ({threadId}) => {
 				console.error('Error fetching data:', error);
 			}
 		};
-		console.log(id)
-		threadId && fetchData();
-	}, []);
+		
+		fetchData();
+	}, [threadId]);
 	
 	return (
 		<>
