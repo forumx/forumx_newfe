@@ -27,7 +27,7 @@ const UserPage = () => {
 	
 	useEffect(() => {
 		getMe();
-		console.log(decoded);
+		// console.log(decoded);
 	}, []);
 	
 	// const shouldRedirect: boolean = res?.status === 401
