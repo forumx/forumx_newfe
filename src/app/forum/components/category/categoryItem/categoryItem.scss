@@ -1,0 +1,14 @@
+.category-wrapper {
+  border-radius: 8px;
+  margin-bottom: 20px;
+
+  .category-info {
+    color: white;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    background-color: #5c7099;
+    border-radius: 5px 5px 0 0;
+    padding: 10px 20px;
+  }
+}
