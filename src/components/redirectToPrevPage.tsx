@@ -11,7 +11,7 @@ const RedirectToPrevPage = () => {
 	const state = searchParams.get("state");
 	console.log(document.cookie)
 	const redirect = async () => {
-		await axios.get(`http://localhost:8080/login/oauth2/code/auth0`, {
+		await axios.get(`${process.env.NEXT_PUBLIC_AUTHORIZE_URL}`, {
 			params: {
 				code: code,
 				state: state,
