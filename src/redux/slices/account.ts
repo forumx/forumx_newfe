@@ -20,7 +20,7 @@ export const accountSlice = createSlice({
 			state.user = action.payload;
 		},
 		logoutAction: (state, action) => {
-			state.user = initialState
+			state.user = initialState.user;
 		},
 		getAccountAction: (state, action) => {
 			state.user = action.payload;
