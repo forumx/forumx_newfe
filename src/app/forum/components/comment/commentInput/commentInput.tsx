@@ -7,6 +7,7 @@ import "./commentInput.scss"
 import {FaReply} from "react-icons/fa";
 import {removeReplyComment} from "@/redux/slices/comment";
 import {IoPaperPlane} from "react-icons/io5";
+import {RootState} from "@/redux/store";
 
 interface ICommentInputProps {
 	replyComment: CommentType | null
@@ -33,7 +34,7 @@ const initialCommentRequest = {
 const CommentInput:React.FC<ICommentInputProps> = () => {
 	const [inputValue, setInputValue] = useState ("");
 	const [commentRequest, setCommentRequest] = useState<CommentRequest> (initialCommentRequest)
-	const replyComment: CommentType = useSelector(state => state.comment.replyComment);
+	const replyComment = useSelector((state: RootState) => state.comment.replyComment);
 	const dispatch = useDispatch();
 	
 	const handleChangeInput = (e) => {
