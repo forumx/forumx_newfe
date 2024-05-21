@@ -17,7 +17,7 @@ const RedirectToPrevPage = () => {
 				state: state,
 			},
 			withCredentials: true,
-			
+
 		})
 			.then((response) => {
 				if(response.data.status === "success") {
@@ -28,6 +28,7 @@ const RedirectToPrevPage = () => {
 			.catch((error) => {
 				console.log(error);
 			});
+		console.log('redirect')
 	}
 	
 	useEffect(() => {

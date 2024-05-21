@@ -8,9 +8,6 @@ interface RedirectLoginPageProps {
 }
 
 const RedirectLoginPage: React.FC<RedirectLoginPageProps> = ({ shouldRedirect }) => {
-	const currentUrl = document.location.href;
-	localStorage.setItem("currentUrl", currentUrl);
-	
 	useEffect(() => {
 		const getRedirectUrl = async () => {
 			axios.get(`${process.env.NEXT_PUBLIC_REDIRECT_LOGIN_URL}`, {
@@ -25,9 +22,9 @@ const RedirectLoginPage: React.FC<RedirectLoginPageProps> = ({ shouldRedirect })
 				})
 		};
 		
-		if (shouldRedirect) {
+		// if (shouldRedirect) {
 			getRedirectUrl();
-		}
+		// }
 	}, [shouldRedirect]);
 	
 	return <Spin tip={"Bạn đang được chuyển hướng về trang đăng nhập ..."} size={"large"} style={{

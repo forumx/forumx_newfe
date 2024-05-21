@@ -31,8 +31,13 @@ userInstance.interceptors.response.use(
 		// Any status codes that fall outside the range of 2xx cause this function to trigger
 		// Do something with response error
 		if (error.response && error.response.status === 401) {
+			if(window.location.pathname !== '/redirect' && window.location.pathname !== '/login/oauth2/code/auth0') {
+				const currentUrl = document.location.href;
+				localStorage.setItem("currentUrl", currentUrl);
+			}
 			if (typeof window !== "undefined") {
-				window.location.href = "/user/1";
+
+				window.location.href = "/redirect";
 			}
 		}
 		return Promise.reject(error);  // Ensure the error is returned
