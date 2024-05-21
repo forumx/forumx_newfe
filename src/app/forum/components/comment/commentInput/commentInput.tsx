@@ -18,7 +18,7 @@ export type CommentRequest = {
 	},
 	"threadId": number,
 	"content": string,
-	"replyToId": number
+	"replyToId": number | null
 }
 
 const initialCommentRequest = {
