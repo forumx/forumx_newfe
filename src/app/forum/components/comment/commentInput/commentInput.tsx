@@ -35,19 +35,21 @@ const initialCommentRequest = {
 
 const CommentInput:React.FC<ICommentInputProps> = ({threadId}) => {
 	const [inputValue, setInputValue] = useState ("");
-	const [commentRequest, setCommentRequest] = useState<CommentRequest> (initialCommentRequest)
+	const [commentRequest, setCommentRequest] = useState<CommentRequest> (initialCommentRequest);
 	const replyComment = useSelector((state: RootState) => state.comment.replyComment);
-	const user = useSelector((state: RootState) => state.account.user)
+	const user = useSelector((state: RootState) => state.account.user);
 	const dispatch = useDispatch();
 	
-	useEffect (() => {
-		if(replyComment?.id > 0) {
-			setCommentRequest({...commentRequest, replyToId: replyComment.id})
-		}
-		setCommentRequest({...commentRequest, threadId: threadId});
-		setCommentRequest({...commentRequest, user: {id: user.id}})
-		console.log(commentRequest)
-	}, [threadId]);
+	
+		useEffect(() => {
+			setCommentRequest((prev) => ({
+				...prev,
+				threadId: threadId,
+				user: { id: user.id },
+				replyToId: replyComment?.id || null,
+			}));
+		}, []);
+		
 	
 	
 	const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -55,15 +57,23 @@ const CommentInput:React.FC<ICommentInputProps> = ({threadId}) => {
 		// console.log(inputValue)
 		setCommentRequest({...commentRequest, content: inputValue});
 		console.log(commentRequest)
+		setCommentRequest((prev) => ({
+			...prev,
+			threadId: threadId,
+			user: { id: user.id },
+			replyToId: replyComment?.id || null,
+		}));
 	}
 	
 	const handleRemoveReply = () => {
-		dispatch(removeReplyComment())
+		dispatch(removeReplyComment());
+
 	}
 	
 	const handleComment = async() => {
 		const res = await callCommentToThread(commentRequest);
 		console.log(res);
+		window.location.reload()
 	}
 	
 	return (

@@ -7,7 +7,7 @@ const Home = async() => {
 	// 	.catch(err => console.log(err));
 	
   return (
-	  <p>Hello world</p>
+	  <p style={{color: "white", fontWeight: "bold", fontSize: "30px", textAlign: "center"}}>Welcome to ForumX</p>
   );
 }
 

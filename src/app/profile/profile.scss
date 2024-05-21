@@ -1,0 +1,29 @@
+.profile-wrapper {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  //align-items: center;
+  height: 100vh; /* Full height of the viewport */
+  color: white;
+}
+
+.avatar-wrapper {
+  margin-right: 20px; /* Space between avatar and user info */
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info-item {
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+.avatar {
+  border: 2px solid #ddd;
+}

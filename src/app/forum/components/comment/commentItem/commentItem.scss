@@ -1,0 +1,44 @@
+.reply-comment-wrapper {
+  margin-top: 40px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .icon-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    margin-right: 10px;
+    .icon {
+      color: #ff944d;
+      transform: rotate(180deg);
+      margin-right: 3px;
+    }
+  }
+  .reply-comment {
+    border-left: 2px solid #ff944d;
+    width: 70%;
+    .author {
+      color: #ff944d;
+      display: flex;
+      align-items: center;
+      padding: 3px 10px;
+      background-color: #ebeced;
+      position: relative;
+
+      .cancel-button {
+        position: absolute;
+        top: 3px;
+        right: 10px;
+        cursor: pointer;
+      }
+    }
+    .content {
+      background-color: #d3d5d7;
+      display: flex;
+      align-items: center;
+      padding: 3px 10px;
+    }
+  }
+}

@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 	const pathName = usePathname();
-	console.log(pathName)
+	// console.log(pathName)
 	
   return (
 	  <StoreProvider>
