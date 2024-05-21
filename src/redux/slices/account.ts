@@ -33,6 +33,6 @@ export const accountSlice = createSlice({
 	},
 });
 
-export const {loginAction, logoutAction} = accountSlice.actions;
+export const {loginAction, logoutAction, getTokenAction, getAccountAction} = accountSlice.actions;
 
 export default accountSlice.reducer;

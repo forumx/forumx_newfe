@@ -30,7 +30,7 @@ const CommentList:React.FC<CommentListProp> = ({threadId}) => {
 				(commentList.map(comment => (
 					<CommentItem key={comment.id} comment={comment}/>
 				))) : (
-					<>There is no comments in this thread</>
+					<></>
 			)}
 			
 		</>

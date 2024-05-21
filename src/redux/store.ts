@@ -2,10 +2,12 @@
 
 import {configureStore} from "@reduxjs/toolkit";
 import {commentSlice} from "@/redux/slices/comment";
+import {accountSlice} from "@/redux/slices/account";
 
 export const store = configureStore({
 	reducer: {
 		comment: commentSlice.reducer,
+		account: accountSlice.reducer,
 	},
 	devTools: process.browser,
 });

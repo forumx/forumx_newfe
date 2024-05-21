@@ -95,7 +95,7 @@ const ThreadDetails = (props: any) => {
 			
 			<CommentList threadId={currentThread.id}/>
 			
-			<CommentInput replyComment={replyComment}/>
+			<CommentInput threadId={threadId}/>
 		</div>
 		
 	)

@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {CommentType} from "@/types/comment";
 import {useDispatch, useSelector} from "react-redux";
 import "./commentInput.scss"
@@ -8,9 +8,11 @@ import {FaReply} from "react-icons/fa";
 import {removeReplyComment} from "@/redux/slices/comment";
 import {IoPaperPlane} from "react-icons/io5";
 import {RootState} from "@/redux/store";
+import {callCommentToThread} from "@/apis/forum/comments.api";
 
 interface ICommentInputProps {
-	replyComment: CommentType | null
+	threadId: number;
+	
 }
 
 export type CommentRequest = {
@@ -31,19 +33,37 @@ const initialCommentRequest = {
 	"replyToId": null
 }
 
-const CommentInput:React.FC<ICommentInputProps> = () => {
+const CommentInput:React.FC<ICommentInputProps> = ({threadId}) => {
 	const [inputValue, setInputValue] = useState ("");
 	const [commentRequest, setCommentRequest] = useState<CommentRequest> (initialCommentRequest)
 	const replyComment = useSelector((state: RootState) => state.comment.replyComment);
+	const user = useSelector((state: RootState) => state.account.user)
 	const dispatch = useDispatch();
+	
+	useEffect (() => {
+		if(replyComment?.id > 0) {
+			setCommentRequest({...commentRequest, replyToId: replyComment.id})
+		}
+		setCommentRequest({...commentRequest, threadId: threadId});
+		setCommentRequest({...commentRequest, user: {id: user.id}})
+		console.log(commentRequest)
+	}, [threadId]);
+	
 	
 	const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setInputValue(e.target.value);
-		console.log(inputValue)
+		// console.log(inputValue)
+		setCommentRequest({...commentRequest, content: inputValue});
+		console.log(commentRequest)
 	}
 	
 	const handleRemoveReply = () => {
 		dispatch(removeReplyComment())
+	}
+	
+	const handleComment = async() => {
+		const res = await callCommentToThread(commentRequest);
+		console.log(res);
 	}
 	
 	return (
@@ -68,7 +88,7 @@ const CommentInput:React.FC<ICommentInputProps> = () => {
 			<div className={"comment-input"}>
 				<div className={"label"}>Your comment:</div>
 				<textarea placeholder={"Your comment..."} className={"input"} value={inputValue} onChange={handleChangeInput}/>
-				<IoPaperPlane className={"icon"} />
+				<IoPaperPlane className={"icon"} onClick={handleComment}/>
 			</div>
 			
 		</div>
