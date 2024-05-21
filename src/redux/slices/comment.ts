@@ -28,7 +28,7 @@ export const commentSlice = createSlice({
 			state.replyComment = action.payload;
 		},
 		removeReplyComment: (state) => {
-			state.replyComment = initialState;
+			state.replyComment = initialState.replyComment;
 		}
 	},
 	extraReducers: (builder) => {
