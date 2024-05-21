@@ -37,7 +37,7 @@ const CommentInput:React.FC<ICommentInputProps> = () => {
 	const replyComment = useSelector((state: RootState) => state.comment.replyComment);
 	const dispatch = useDispatch();
 	
-	const handleChangeInput = (e) => {
+	const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setInputValue(e.target.value);
 		console.log(inputValue)
 	}
