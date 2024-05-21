@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import {StoreProvider} from "@/redux/storeProvider";
-import {Suspense} from "react";
+import React, {Suspense} from "react";
+import Header from "@/components/layout/header/header";
+import FetchAccount from "@/components/auth/fetchAccount";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +21,13 @@ export default function RootLayout({
   return (
 	  <StoreProvider>
 		  <html lang="en">
-			<body><Suspense fallback={<div>Loading...</div>}>
-				{children}</Suspense></body>
+			<body>
+				<Suspense fallback={<div>Loading...</div>}>
+					<Header/>
+					<FetchAccount/>
+					{children}
+				</Suspense>
+			</body>
 			
 		  </html>
 	  </StoreProvider>

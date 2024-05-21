@@ -7,11 +7,39 @@ import {Avatar} from "antd";
 import "./threadDetails.scss"
 import {FaReply} from "react-icons/fa";
 import CommentList from "@/app/forum/components/comment/commentList/commentList";
+import CommentInput from "@/app/forum/components/comment/commentInput/commentInput";
+import {CommentType} from "@/types/comment";
+import {useDispatch} from "react-redux";
+import {removeReplyComment} from "@/redux/slices/comment";
+
+const initialState = {
+	id: 0,
+	title: "",
+	content: null,
+	user: {
+		id: 0,
+		username: "",
+		name: "",
+		enabled: true,
+		img_url: ""
+	},
+	category: {
+		id: 0,
+		name: ""
+	},
+	createdAt: "",
+	updatedAt: "",
+	commentCount: 0,
+	upVoteCount: null,
+	downVoteCount: null
+}
 
 const ThreadDetails = (props: any) => {
 	const threadId = props.params.threadId;
+	const dispatch = useDispatch();
 	
-	const [currentThread, setCurrentThread] = useState<ThreadType | undefined> ()
+	const [currentThread, setCurrentThread] = useState<ThreadType> (initialState)
+	const [replyComment, setReplyComment] = useState<CommentType | null> (null);
 	
 	useEffect (() => {
 		const fetchData = async () => {
@@ -36,31 +64,38 @@ const ThreadDetails = (props: any) => {
 		
 		fetchData();
 	}, [threadId]);
+	
+	const handleRemoveReply = () => {
+		dispatch(removeReplyComment());
+	}
+	
 	return (
 		<div>
 			<div className={"thread-detail"}>
 				<div className={"author"}>
-					<Avatar className={"avatar"} size={64} icon={<UserOutlined />} src={currentThread?.user.img_url} />
-					<div className={"author-name"}>{currentThread?.user.name}</div>
+					<Avatar className={"avatar"} size={64} icon={<UserOutlined />} src={currentThread.user.img_url} />
+					<div className={"author-name"}>{currentThread.user.name}</div>
 				</div>
 				<div className={"thread"}>
 					<div className={"post-time"}>
-						<span>{currentThread?.createdAt}</span>
+						<span>{currentThread.createdAt}</span>
 					</div>
 					<div className={"content-wrapper"}>
 						<div className={"content"}>
-							{currentThread?.content}
+							{currentThread.content}
 						</div>
 						<div className={"reply"}>
 							<FaReply />
-							<div className={"title"}>Reply</div>
+							<div className={"title"} onClick={handleRemoveReply}>Reply</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className={""}>#Comments {currentThread?.commentCount}</div>
+			<div className={"bold white-text"}>#Comments ({currentThread.commentCount})</div>
 			
-			<CommentList threadId={currentThread?.id}/>
+			<CommentList threadId={currentThread.id}/>
+			
+			<CommentInput replyComment={replyComment}/>
 		</div>
 		
 	)

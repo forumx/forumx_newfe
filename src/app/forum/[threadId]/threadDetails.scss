@@ -66,10 +66,19 @@
         flex-direction: row;
         align-items: center;
         align-self: flex-end;
+        cursor: pointer;
         .title {
           margin-left: 3px;
         }
       }
     }
   }
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.white-text {
+  color: white;
 }

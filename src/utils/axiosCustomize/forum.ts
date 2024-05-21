@@ -4,6 +4,7 @@ export const forumBaseURL = process.env.NEXT_PUBLIC_BACKEND_URL_FORUM;
 
 const forumInstance = axios.create({
 	baseURL: forumBaseURL,
+	withCredentials: true,
 })
 
 // Add a request interceptor
@@ -28,13 +29,18 @@ forumInstance.interceptors.response.use(
 	function (error: AxiosError) {
 		// Any status codes that fall outside the range of 2xx cause this function to trigger
 		// Do something with response error
+		if (error.response && error.response.status === 401) {
+			if (typeof window !== "undefined") {
+				window.location.href = "/user/1";
+			}
+		}
 		return Promise.reject(error);  // Ensure the error is returned
 	}
 );
 
 if (typeof window !== "undefined") {
 	forumInstance.defaults.headers.common = {
-		withCredentials: true,
+	
 	};
 }
 

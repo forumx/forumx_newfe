@@ -5,12 +5,21 @@ import React from "react";
 import {Avatar} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import {FaReply} from "react-icons/fa";
+import {useDispatch} from "react-redux";
+import {setReplyComment} from "@/redux/slices/comment";
 
 interface ICommentItemProps {
 	comment: CommentType
 }
 
 const CommentItem:React.FC<ICommentItemProps> = ({comment}) => {
+	const dispatch = useDispatch();
+	
+	const handleReplyComment = () => {
+		console.log(comment);
+		dispatch(setReplyComment(comment));
+	}
+	
 	return (
 		<div className={"thread-detail"}>
 			<div className={"author"}>
@@ -25,7 +34,7 @@ const CommentItem:React.FC<ICommentItemProps> = ({comment}) => {
 					<div className={"content"}>
 						{comment.content}
 					</div>
-					<div className={"reply"}>
+					<div className={"reply"} onClick={handleReplyComment}>
 						<FaReply />
 						<div className={"title"}>Reply</div>
 					</div>

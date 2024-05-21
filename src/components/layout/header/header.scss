@@ -1,0 +1,27 @@
+.header-wrapper {
+  background-color: #ebeced;
+  width: 100vw;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  .header-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    color: #5c7099;
+    height: 100%;
+    font-weight: bold;
+    font-size: 18px;
+
+    .forum-link {
+      margin-left: 20px;
+    }
+
+    .dropdown {
+      margin-left: 20px;
+    }
+  }
+}

@@ -3,28 +3,17 @@
 import {useEffect, useState} from "react";
 import {CategoryType} from "@/types/category";
 import CategoryItem from "@/app/forum/components/category/categoryItem/categoryItem";
+import {callGetAllCategories} from "@/apis/forum/categories.api";
 
 const CategoryList = () => {
 	const [categoryList, setCategoryList] = useState<CategoryType[]> ([])
 	
 	useEffect(() => {
 		const fetchData = async () => {
-			try {
-				const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_FORUM}/categories`, {
-					method: 'GET',
-					credentials: 'include'
-				});
-				
-				if (!response.ok) {
-					throw new Error('Failed to fetch data');
+				const response = await callGetAllCategories();
+				if(response.status === 200) {
+					setCategoryList(response.data.content);
 				}
-				
-				const data = await response.json();
-				setCategoryList(data.content);
-				// console.log(data);
-			} catch (error) {
-				console.error('Error fetching data:', error);
-			}
 		};
 		
 		fetchData();

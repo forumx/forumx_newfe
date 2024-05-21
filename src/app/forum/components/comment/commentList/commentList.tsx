@@ -3,9 +3,10 @@
 import React, {useEffect, useState} from "react";
 import {CommentType} from "@/types/comment";
 import CommentItem from "@/app/forum/components/comment/commentItem/commentItem";
+import {callGetCommentByThreadId} from "@/apis/forum/comments.api";
 
 interface CommentListProp {
-	threadId: number | undefined
+	threadId: number;
 }
 
 const CommentList:React.FC<CommentListProp> = ({threadId}) => {
@@ -14,22 +15,10 @@ const CommentList:React.FC<CommentListProp> = ({threadId}) => {
 	useEffect(() => {
 		
 		const fetchData = async () => {
-			try {
-				const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_FORUM}/comments/${threadId}`, {
-					method: 'GET',
-					credentials: 'include'
-				});
-				
-				if (!response.ok) {
-					throw new Error('Failed to fetch data');
+				const response = await callGetCommentByThreadId(threadId);
+				if(response.status === 200) {
+					setCommentList(response.data.content);
 				}
-				
-				const data = await response.json();
-				setCommentList(data.content);
-				console.log(data);
-			} catch (error) {
-				console.error('Error fetching data:', error);
-			}
 		};
 		
 		fetchData();

@@ -2,15 +2,11 @@ import axios from "axios";
 import type { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 
 export const userBaseURL = process.env.NEXT_PUBLIC_BACKEND_URL_USER;
-export const forumBaseURL = process.env.NEXT_PUBLIC_BACKEND_URL_FORUM;
 
 const userInstance = axios.create({
 	baseURL: userBaseURL,
+	withCredentials: true,
 });
-
-const forumInstance = axios.create({
-	baseURL: forumBaseURL,
-})
 
 // Add a request interceptor
 userInstance.interceptors.request.use(
@@ -34,13 +30,18 @@ userInstance.interceptors.response.use(
 	function (error: AxiosError) {
 		// Any status codes that fall outside the range of 2xx cause this function to trigger
 		// Do something with response error
+		if (error.response && error.response.status === 401) {
+			if (typeof window !== "undefined") {
+				window.location.href = "/user/1";
+			}
+		}
 		return Promise.reject(error);  // Ensure the error is returned
 	}
 );
 
 if (typeof window !== "undefined") {
 	userInstance.defaults.headers.common = {
-		withCredentials: true
+	
 	};
 }
 
